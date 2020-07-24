@@ -21,7 +21,7 @@ public class DiscountAssignmentApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DiscountAssignmentApplication.class, args);
-		System.out.println("angular spring boot application started.");
+		System.out.println("angular springboot application started.");
 		
 	}
 
