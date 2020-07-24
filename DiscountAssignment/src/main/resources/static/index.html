@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<!--Author    : shubham pawar  -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
+
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<!-- Scripts -->
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<!-- <script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script> -->
+
+<script src="/main.js"></script>
+<script src="/main.css"></script>
+
+</head>
+<body ng-app="DiscountManagement" ng-controller="DiscountController">
+
+
+	<form ng-submit="submitDiscount()">
+		<table border="0">
+			<tr>
+				<td>name</td>
+				<td><input type="text" ng-model="discountForm.Name" /></td>
+			</tr>
+			<tr>
+				<td>Product</td>
+				<td><select name="product" ng-model="discountForm.product">
+						<option value="select" selected>select</option>
+						<option value="Product1">Product1</option>
+						<option value="Product2">Product2</option>
+						<option value="Product3">Product3</option>
+						<option value="Product4">Product4</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Discount in percentage</td>
+				<td><input type="number" ng-model="discountForm.discount"
+					min="1" max="100" /></td>
+			</tr>
+			<tr>
+				<td>Start Date</td>
+				<td><input type="datetime-local"
+					ng-model="discountForm.startDate" /></td>
+			</tr>
+			<tr>
+				<td>End Date</td>
+				<td><input type="datetime-local"
+					ng-model="discountForm.endDate" /></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><input type="submit" value="add"
+					class="create-button" /></td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	<hr>
+	<table border="1" class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+		<tr>
+			 <th>Discount Id</th>
+			<th>Name</th>
+			<th>Discount in Percentage</th>
+			<th>Product</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+			<th>View</th>
+
+		</tr>
+		
+		Limit to show rows :<input type="number" ng-model="rowcount"><br>
+		Row start from index : <input type="number" ng-model="rowstart">
+		<br>
+		order by : <select ng-model="sortcolom">
+		<option value ="name">name asc</option>
+		<option value ="discount">discount asc</option>
+		<option value ="Product">product asc</option>
+		</select>
+		
+		<tbody>
+		<tr ng-repeat="discount in discountList | limitTo:rowcount:rowstart | orderBy : sortcolom">
+			 <td> {{$index+1}}</td>
+			
+			<td>{{ discount.name }}</td>
+			<td>{{ discount.discount }}</td>
+
+			<td>{{ discount.product }}</td>
+			<td>{{ discount.startDate }}</td>
+			<td>{{ discount.endDate }}</td>
+
+			<td><button ng-click="viewdiscount(discount)"
+					class="view-button">View</button></td>
+
+		</tr>
+					</tbody>
+		
+	</table>
+
+	<pagination ng-model="currentPage" total-items="todos.length"
+		max-size="maxSize" boundary-links="true"> </pagination>
+
+	<div class="container">
+		<!--   <button ng-click="viewdiscount('Success')" class="btn btn-default">Success</button>
+ -->
+		<modal visible="showModal"> </modal>
+	</div>
+
+</body>
+</html>
