@@ -34,6 +34,7 @@ public class MainController {
 	@RequestMapping(value = "/DiscountsList", method = RequestMethod.GET)
 	public List<Discount> getDiscountss() {
 		List<Discount> list = discountService.getAllDiscount();
+		System.out.println("get List");
 		return list;
 	}
 
